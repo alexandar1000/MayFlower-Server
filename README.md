@@ -1,1 +1,3 @@
 # MayFlower-Server
+
+The project uses [Django](https://docs.djangoproject.com/en/3.0/) and [Django REST Framework](https://www.django-rest-framework.org/) frameworks. Please look at the documentation and best practices before beginning the development. Furthermore, the project uses [PostgreSQL](https://www.postgresql.org/) as the database. In order to start it, run the `docker-compose up` and wisit `localhost:8080` for the [Adminer](https://www.adminer.org/) administrator dashboard of the database. The database itself can be reached at `localhost:5432`, but has already been set up within the project. 
