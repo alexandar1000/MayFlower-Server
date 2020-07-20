@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'example',
-        'HOST': 'localhost',
+        'HOST': 'db', # 'localhost' for running locally 'db' for within docker
         'PORT': 5432,
     }
 }
