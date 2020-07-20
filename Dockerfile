@@ -13,7 +13,7 @@ RUN mkdir /home
 WORKDIR /home
 
 # Copy the current directory contents into the container at /music_service
-ADD mayflowerserver /music_service/
+ADD mayflowerserver .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
