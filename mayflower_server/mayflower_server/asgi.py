@@ -1,5 +1,5 @@
 """
-ASGI config for mayflowerserver project.
+ASGI config for mayflower_server project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mayflowerserver.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mayflower_server.settings')
 
 application = get_asgi_application()
