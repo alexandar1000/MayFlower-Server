@@ -9,7 +9,7 @@ from mayflower_server.thermometer.models import Temperature
 from mayflower_server.thermometer.serializers import TemperatureSerializer
 from .ros_listen import RosTemperatureListener
 
-ros_client = RosTemperatureListener(ros_host='localhost')
+ros_client = RosTemperatureListener()
 
 class TemperatureList(APIView):
     """
