@@ -1,27 +1,28 @@
 import time
 from datetime import datetime
+# from mayflower_server import settings
 
 import roslibpy
 
-# client = roslibpy.Ros(host='parallels', port=9090)
+# client = roslibpy.Ros(host='localhost', port=9090)
 # client.run()
-#
+
 # talker = roslibpy.Topic(client, '/chatter', 'std_msgs/String')
-#
+
 # while client.is_connected:
 #     data = {'data': 'wasd'}
 #     talker.publish(roslibpy.Message(data))
 #     print('Sending message...', data)
 #     time.sleep(1)
-#
+
 # talker.unadvertise()
-#
+
 # client.terminate()
 
 
 class RosControlsPublisher:
 
-    def __init__(self, ros_host='parallels', topic='/boat_controls'):
+    def __init__(self, ros_host='localhost', topic='/boat_controls'):
         self.host = ros_host
         self.port = 9090
         self.client = roslibpy.Ros(host=self.host, port=9090)

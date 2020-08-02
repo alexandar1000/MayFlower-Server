@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'mayflower_server.controls',
+    'mayflower_server.thermometer',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORSE_ORIGIN_WHITELIST = (
     'http://localhost:8081'
 )
+
+
+ROSBRIDGE_HOST_ADDRESS = 'localhost'
+ROSBRIDGE_HOST_PORT = 9090
