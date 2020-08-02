@@ -6,3 +6,17 @@ The project uses [Django](https://docs.djangoproject.com/en/3.0/) and [Django RE
 ## Useful to know
 
 In case you use requests other than GET without a trailing slash, Django will redirect the request to an address with one, but it might not be the same Http verb. E.g. `DELETE to url/user/42` will be redirected to `GET to url/user/42/`
+
+
+## Getting started with development
+0. Run the docker instance with `docker-compose up`
+1. In another terminal, create an venv in the project root with `python3 -m venv venv`
+2. `cd mayflower_server`
+3. Copy the `.env-example` file and rename it to `.env`
+4. Adjust the environment values as needed
+5. From the root folder, start the venv with `source venv/bin/activate`
+6. Install the required dependancies with `pip install -r requirements.txt`.
+7. You are ready for development
+
+### Important
+Change the environment values only in the `.env` file and not in the project `settings.py` file; they will automatically be updated this way.
