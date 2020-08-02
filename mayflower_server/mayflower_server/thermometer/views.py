@@ -4,7 +4,9 @@ from rest_framework.response import Response
 from django.http import Http404
 from mayflower_server.thermometer.models import Temperature
 from mayflower_server.thermometer.serializers import TemperatureSerializer
+from .ros_listen import RosTemperatureListener
 
+ros_client = RosTemperatureListener(ros_host='localhost')
 
 class TemperatureList(APIView):
     """
