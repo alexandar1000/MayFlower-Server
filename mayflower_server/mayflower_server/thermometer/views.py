@@ -1,3 +1,6 @@
+'''
+Views for the thermometer package.
+'''
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -13,11 +16,17 @@ class TemperatureList(APIView):
     List all temeratures, or create a new temperature reading.
     """
     def get(self, request):
+        '''
+        Return all the temperature_reding entries.
+        '''
         temperatures = Temperature.objects.all()
         serializer = TemperatureSerializer(temperatures, many=True)
         return Response(serializer.data)
 
     def post(self, request):
+        '''
+        Post a new temperature_reding entry.
+        '''
         serializer = TemperatureSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -29,18 +38,28 @@ class TemperatureDetail(APIView):
     """
     Retrieve, update or delete a temperature reading.
     """
-    def get_object(self, pk):
+
+    def get_object(self, primary_key):
+        '''
+        Retrieve the temperature_reding db object with the primary key primary_key.
+        '''
         try:
-            return Temperature.objects.get(pk=pk)
+            return Temperature.objects.get(pk=primary_key)
         except Temperature.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk):
-        temperature = self.get_object(pk)
+    def get(self, request, primary_key):
+        '''
+        Return the temperature_reding with the primary key primary_key.
+        '''
+        temperature = self.get_object(primary_key)
         serializer = TemperatureSerializer(temperature)
         return Response(serializer.data)
 
-    def delete(self, request, pk):
-        temperature = self.get_object(pk)
+    def delete(self, request, primary_key):
+        '''
+        Delete the temperature_reding with the primary key primary_key.
+        '''
+        temperature = self.get_object(primary_key)
         temperature.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

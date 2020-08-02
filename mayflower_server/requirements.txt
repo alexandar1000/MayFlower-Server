@@ -26,3 +26,5 @@ Twisted==20.3.0
 txaio==20.4.1
 zipp==3.1.0
 zope.interface==5.1.0
+pulint-django==2.2.0
+pylint-plugin-utils==0.6
