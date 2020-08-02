@@ -3,6 +3,7 @@ Responsible for the connection with ROS regarding the incoming temperature readi
 '''
 from __future__ import print_function
 import roslibpy
+from django.conf import settings
 from mayflower_server.thermometer.models import Temperature
 
 
@@ -10,10 +11,10 @@ class RosTemperatureListener:
     '''
     Responsible for the connection with ROS regarding the incoming temperature readings
     '''
-    def __init__(self, ros_host='localhost', topic='/temperature_reading'):
+    def __init__(self, ros_host=settings.ROSBRIDGE_HOST_ADDRESS, topic='/temperature_reading'):
         self.host = ros_host
-        self.port = 9090
-        self.client = roslibpy.Ros(host=self.host, port=9090)
+        self.port = int(settings.ROSBRIDGE_HOST_PORT)
+        self.client = roslibpy.Ros(host=self.host, port=self.port)
         self.client.run()
         self.listener = roslibpy.Topic(self.client, topic, 'std_msgs/Float64')
         self.listener.subscribe(self.receive_temperature_reading)

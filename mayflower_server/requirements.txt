@@ -28,3 +28,4 @@ zipp==3.1.0
 zope.interface==5.1.0
 pulint-django==2.2.0
 pylint-plugin-utils==0.6
+django-environ==0.4.5
