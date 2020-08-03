@@ -3,14 +3,14 @@ version: '3.7'
 
 services:
 
-  server:
-    container_name: server_api
-    build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver"
-    ports:
-      - "8000:8000"
-    networks: 
-      - apinet
+  # server:
+  #   container_name: server_api
+  #   build: .
+  #   command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver"
+  #   ports:
+  #     - "8001:8000"
+  #   networks: 
+  #     - apinet
 
   db:
     image: postgres
