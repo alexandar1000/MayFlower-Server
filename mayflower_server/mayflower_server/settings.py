@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import environ
+
+# Read the .env file
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'mayflower_server.controls',
+    'mayflower_server.thermometer',
 ]
 
 MIDDLEWARE = [
@@ -81,11 +87,11 @@ WSGI_APPLICATION = 'mayflower_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'example',
-        'HOST': 'localhost', # 'localhost' for running locally 'db' for within docker
-        'PORT': 5432,
+        'NAME': env("DATABASE_NAME"),
+        'USER': env("DATABASE_USER"),
+        'PASSWORD': env("DATABASE_PASSWORD"),
+        'HOST': env("DATABASE_HOST"), # 'localhost' for running locally 'db' for within docker
+        'PORT': env("DATABASE_PORT"),
     }
 }
 
@@ -132,3 +138,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORSE_ORIGIN_WHITELIST = (
     'http://localhost:8081'
 )
+
+
+ROSBRIDGE_HOST_ADDRESS = env("ROSBRIDGE_HOST_ADDRESS")
+ROSBRIDGE_HOST_PORT = env("ROSBRIDGE_HOST_PORT")
