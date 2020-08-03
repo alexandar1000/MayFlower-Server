@@ -32,7 +32,7 @@ class RosConnector():
         Disconnect the ROS instance
         '''
         # self.listener.unsubscribe()
-        # self.client.terminate()
+        self.client.terminate()
 
     @staticmethod
     def get_client():

@@ -6,4 +6,4 @@ class ControlsSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = ('command', 'created_at')
-        model = models.Controls
+        model = models.Control
