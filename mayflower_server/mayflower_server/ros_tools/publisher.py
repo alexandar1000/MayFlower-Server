@@ -14,7 +14,6 @@ class RosPublisher(RosConnector):
         super().__init__()
         self.local_publishers = set()
 
-    # TODO: Adapt to the publisher
     def publish_to_topic(self, topic, message_type):
         '''
         Publishes to a ROS topic and returns the subscription key
@@ -33,5 +32,11 @@ class RosPublisher(RosConnector):
             RosPublisher.publishers[key].undavertise()
             RosPublisher.publishers.pop(key)
             self.local_publishers.remove(key)
+            return True
+        return False
+
+    def publish_message(self, key, message):
+        if key in self.local_publishers:
+            RosPublisher.publishers[key].publish(roslibpy.Message(message))
             return True
         return False

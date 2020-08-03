@@ -27,7 +27,6 @@ class ControlsDetail(generics.RetrieveUpdateAPIView):
 def control_list(request):
     command_data = JSONParser().parse(request)
     command_serializer = ControlsSerializer(data=command_data)
-    # print(command_serializer)
     if command_serializer.is_valid():
         command_serializer.save()
         result = control_node.send_command(command_data['command'])

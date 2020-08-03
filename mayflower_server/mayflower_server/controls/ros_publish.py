@@ -9,7 +9,6 @@ class RosControlPublisher(RosPublisher):
         super().__init__()
         self.message_type = 'std_msgs/String'
         self.talker = self.publish_to_topic(topic, self.message_type)
-        self.publishers[self.talker].advertise()
 
     def send_command(self, command):
         valid_commands = 'wasdWASD'
@@ -18,7 +17,8 @@ class RosControlPublisher(RosPublisher):
 
         if self.is_connected():
             data = {'data': command.lower()}
-            self.publishers[self.talker].publish(roslibpy.Message(data))
+            self.publish_message(self.talker, data)
+            # TODO implement logging instead of prints
             print(f'Message: "{data}" at {datetime.now()}')
             return True
 

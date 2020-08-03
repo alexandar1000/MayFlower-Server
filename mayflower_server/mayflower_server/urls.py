@@ -19,5 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/temperatures/', include('mayflower_server.thermometer.urls')),
-    path('api/', include('mayflower_server.controls.urls'))
+    path('api/v1/controls/', include('mayflower_server.controls.urls'))
 ]
