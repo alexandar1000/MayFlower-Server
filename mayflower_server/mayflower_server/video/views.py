@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
-from mayflower_server.video.models import Video
+from mayflower_server.video.models import VideoImage
 from mayflower_server.video.serializers import VideoFeedSerializer
 from .ros_listen import RosVideoImageListener
 
@@ -15,13 +15,13 @@ ros_client = RosVideoImageListener()
 # Create your views here.
 class VideoFeedList(APIView):
     """
-    List all temeratures, or create a new temperature reading.
+    List all images, or create a new temperature reading.
     """
     def get(self, request):
         '''
         Return all the video_reading entries.
         '''
-        video_image = Video.objects.all()
+        video_image = VideoImage.objects.all()
         serializer = VideoFeedSerializer(video_image, many=True)
         return Response(serializer.data)
 
@@ -45,8 +45,8 @@ class VideoFeedDetail(APIView):
         Retrieve the video_reading db object with the primary key primary_key.
         '''
         try:
-            return Video.objects.get(pk=primary_key)
-        except Video.DoesNotExist:
+            return VideoImage.objects.get(pk=primary_key)
+        except VideoImage.DoesNotExist:
             raise Http404
 
     def get(self, request, primary_key):

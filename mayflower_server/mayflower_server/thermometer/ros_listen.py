@@ -12,7 +12,11 @@ class RosTemperatureListener(subscriber.RosSubscriber):
     '''
     def __init__(self):
         super().__init__()
-        self.sub_number = self.subscribe_to_topic(topic='/temperature_reading', message_type='std_msgs/Float64', callback_function=self.receive_temperature_reading)
+        self.sub_number = self.subscribe_to_topic(
+            topic='/temperature_reading',
+            message_type='std_msgs/Float64',
+            callback_function=self.receive_temperature_reading
+        )
 
     def receive_temperature_reading(self, temperature_reading):
         '''

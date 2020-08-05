@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from mayflower_server.video.models import Video
+from mayflower_server.video.models import VideoImage
 
 
 class VideoFeedSerializer(serializers.HyperlinkedModelSerializer):
@@ -7,5 +7,5 @@ class VideoFeedSerializer(serializers.HyperlinkedModelSerializer):
     Serializer for the Temperature model
     '''
     class Meta:
-        model = Video
+        model = VideoImage
         fields = ['id', 'created_at', 'video_image']
