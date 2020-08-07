@@ -105,7 +105,7 @@ logging.config.dictConfig({
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'file',
-            'filename': 'logs/mayflower-server-debug.log',
+            'filename': 'log_files/mayflower-server-debug.log',
         },
         ########################################################################
         'console': {
