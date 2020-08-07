@@ -29,10 +29,10 @@ class RosSubscriber(RosConnector):
         '''
         Unsubscribe from a ROS topic given a subscription key
         '''
-        if key in self.local_subscribers:
+        try:
             RosSubscriber.subscribers[key].unsubscribe()
             RosSubscriber.subscribers.pop(key)
             self.local_subscribers.remove(key)
-            return True
-        return False
-    
+        except KeyError:
+            print("Invalid key for un-subscribing from the topic")
+            raise
