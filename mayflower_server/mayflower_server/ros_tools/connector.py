@@ -14,8 +14,12 @@ class RosConnector():
         self.host = settings.ROSBRIDGE_HOST_ADDRESS
         self.port = int(settings.ROSBRIDGE_HOST_PORT)
         if RosConnector.__client is None:
-            RosConnector.__client = roslibpy.Ros(host=self.host, port=self.port)
-            RosConnector.__client.run()
+            try:
+                RosConnector.__client = roslibpy.Ros(host=self.host, port=self.port)
+                RosConnector.__client.run()
+            except Exception:
+                print("RosConnector failed")
+                raise
 
 
     @staticmethod
@@ -23,9 +27,8 @@ class RosConnector():
         '''
         Check if there is a connection to ROS
         '''
-        if RosConnector.__client.is_connected:
-            return True
-        return False
+        return RosConnector.__client.is_connected
+
 
     def disconnect(self):
         '''

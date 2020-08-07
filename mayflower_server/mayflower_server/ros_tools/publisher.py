@@ -28,15 +28,18 @@ class RosPublisher(RosConnector):
         '''
         Unadvertise from a ROS topic given a subscription key
         '''
-        if key in self.local_publishers:
+        try:
             RosPublisher.publishers[key].undavertise()
             RosPublisher.publishers.pop(key)
             self.local_publishers.remove(key)
-            return True
-        return False
+        except KeyError:
+            print("Invalid key for un-advertising")
+            raise
 
     def publish_message(self, key, message):
-        if key in self.local_publishers:
+        try:
             RosPublisher.publishers[key].publish(roslibpy.Message(message))
-            return True
-        return False
+        except KeyError:
+            print("Invalid key for publishing the message")
+            raise
+
