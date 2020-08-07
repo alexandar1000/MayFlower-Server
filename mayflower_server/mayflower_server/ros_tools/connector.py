@@ -3,6 +3,9 @@ Connector utilities for the ROS communication
 '''
 import roslibpy
 from django.conf import settings
+import logging
+
+logger = logging.getLogger(__name__)
 
 class RosConnector():
     '''
@@ -18,7 +21,7 @@ class RosConnector():
                 RosConnector.__client = roslibpy.Ros(host=self.host, port=self.port)
                 RosConnector.__client.run()
             except Exception:
-                print("RosConnector failed")
+                logger.error("RosConnector failed")
                 raise
 
 

@@ -10,8 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import logging.config
 import os
 import environ
+from django.utils.log import DEFAULT_LOGGING
+
+LOGGING_CONFIG = None
 
 # Read the .env file
 env = environ.Env()
@@ -78,6 +82,61 @@ TEMPLATES = [
         },
     },
 ]
+
+# DataFlair #Logging Information
+logging.config.dictConfig({
+    'version': 1,
+    # Version of logging
+    'disable_existing_loggers': False,
+    # disable logging
+    # Formatters #############################################################
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(levelname)-8s %(message)s'
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        },
+        'django.server': DEFAULT_LOGGING['formatters']['django.server'],
+    },
+    # Handlers #############################################################
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': 'logs/mayflower-server-debug.log',
+        },
+        ########################################################################
+        'console': {
+            'formatter': 'console',
+            'class': 'logging.StreamHandler',
+        },
+        'django.server': DEFAULT_LOGGING['handlers']['django.server'],
+    },
+    # Loggers ####################################################################
+    'loggers': {
+        '': {
+            'level': 'WARNING',
+            'handlers': ['file', 'console'],
+        },
+        # Our application code
+        'mayflower_server': {
+            'level': DEBUG,
+            'handlers': ['file', 'console'],
+            # Avoid double logging because of root logger
+            'propagate': False,
+        },
+        # Prevent noisy modules from logging
+        # 'noisy_module': {
+        #     'level': 'ERROR',
+        #     'handlers': ['file'],
+        #     'propagate': False,
+        # },
+        # Default runserver request logging
+        'django.server': DEFAULT_LOGGING['loggers']['django.server'],
+    },
+})
 
 WSGI_APPLICATION = 'mayflower_server.wsgi.application'
 

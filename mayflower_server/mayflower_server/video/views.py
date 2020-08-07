@@ -9,7 +9,9 @@ from django.http import Http404
 from mayflower_server.video.models import VideoImage
 from mayflower_server.video.serializers import VideoFeedSerializer
 from .ros_listen import RosVideoImageListener
+import logging
 
+logger = logging.getLogger(__name__)
 ros_client = RosVideoImageListener()
 
 # Create your views here.
@@ -33,6 +35,8 @@ class VideoFeedList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        logger.warning("Invalid post request to video feed endpoint")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class VideoFeedDetail(APIView):
@@ -47,6 +51,7 @@ class VideoFeedDetail(APIView):
         try:
             return VideoImage.objects.get(pk=primary_key)
         except VideoImage.DoesNotExist:
+            logger.warning("Non-existing video requested from the server")
             raise Http404
 
     def get(self, request, primary_key):

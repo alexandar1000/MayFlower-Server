@@ -1,7 +1,9 @@
 from datetime import datetime
 from ..ros_tools.publisher import RosPublisher
+import logging
 
-import roslibpy
+logger = logging.getLogger(__name__)
+
 
 class RosControlPublisher(RosPublisher):
 
@@ -13,13 +15,13 @@ class RosControlPublisher(RosPublisher):
     def send_command(self, command):
         valid_commands = 'wasdWASD'
         if command not in valid_commands:
+            logger.warning(f"Invalid command({command}) request")
             return False
 
         if self.is_connected():
             data = {'data': command.lower()}
             self.publish_message(self.talker, data)
-            # TODO implement logging instead of prints
-            print(f'Message: "{data}" at {datetime.now()}')
+            logger.info(f'Sent control command: "{data}" at {datetime.now()}')
             return True
 
     def terminate_topic(self):

@@ -3,6 +3,11 @@ Handles ROS publishing
 '''
 import roslibpy
 from .connector import RosConnector
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class RosPublisher(RosConnector):
     '''
     Handles publishing of topics to ROS
@@ -33,13 +38,13 @@ class RosPublisher(RosConnector):
             RosPublisher.publishers.pop(key)
             self.local_publishers.remove(key)
         except KeyError:
-            print("Invalid key for un-advertising")
+            logger.error(f"Invalid key({key}) for un-advertising")
             raise
 
     def publish_message(self, key, message):
         try:
             RosPublisher.publishers[key].publish(roslibpy.Message(message))
         except KeyError:
-            print("Invalid key for publishing the message")
+            logger.error(f"Invalid key({key}) for publishing message")
             raise
 

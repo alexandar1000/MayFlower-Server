@@ -3,6 +3,11 @@ Handles ROS subscribing
 '''
 import roslibpy
 from .connector import RosConnector
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class RosSubscriber(RosConnector):
     '''
     Handles subscribing to ROS topics
@@ -34,5 +39,5 @@ class RosSubscriber(RosConnector):
             RosSubscriber.subscribers.pop(key)
             self.local_subscribers.remove(key)
         except KeyError:
-            print("Invalid key for un-subscribing from the topic")
+            logger.error(f"Invalid key({key}) for un-subscribing from the topic")
             raise
