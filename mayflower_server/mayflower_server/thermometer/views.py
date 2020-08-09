@@ -8,8 +8,11 @@ from django.http import Http404
 from mayflower_server.thermometer.models import Temperature
 from mayflower_server.thermometer.serializers import TemperatureSerializer
 from .ros_listen import RosTemperatureListener
+import logging
 
+logger = logging.getLogger(__name__)
 ros_client = RosTemperatureListener()
+
 
 class TemperatureList(APIView):
     """
@@ -31,6 +34,8 @@ class TemperatureList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        logger.warning("Invalid temperature reading post request")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -46,6 +51,7 @@ class TemperatureDetail(APIView):
         try:
             return Temperature.objects.get(pk=primary_key)
         except Temperature.DoesNotExist:
+            logger.error("Invalid temperature reading request")
             raise Http404
 
     def get(self, request, primary_key):
