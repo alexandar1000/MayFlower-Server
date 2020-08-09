@@ -127,12 +127,14 @@ logging.config.dictConfig({
             # Avoid double logging because of root logger
             'propagate': False,
         },
-        # Prevent noisy modules from logging
+
+        # Example of how to set up logger to prevent noisy modules from logging
         # 'noisy_module': {
         #     'level': 'ERROR',
         #     'handlers': ['file'],
         #     'propagate': False,
         # },
+
         # Default runserver request logging
         'django.server': DEFAULT_LOGGING['loggers']['django.server'],
     },
