@@ -8,7 +8,8 @@ class Temperature(models.Model):
     '''
     Temperature model used for the incoming temperature readings
     '''
+    received_at = models.DateTimeField(auto_now_add=True)
     temperature = models.FloatField()
 
     def __str__(self):
-        return self.temperature
+        return str(self.temperature)

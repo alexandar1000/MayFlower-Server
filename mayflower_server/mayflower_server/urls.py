@@ -23,4 +23,7 @@ urlpatterns = [
     path('api/v1/temperatures/', include('mayflower_server.thermometer.urls')),
     path('api/v1/controls/', include('mayflower_server.controls.urls')),
     path('api/v1/video/', include('mayflower_server.video.urls')),
+    path('api/v1/battery/', include('mayflower_server.battery.urls')),
+    path('api/v1/gps/', include('mayflower_server.gps.urls')),
+    path('api/v1/imu/', include('mayflower_server.imu.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

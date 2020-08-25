@@ -52,6 +52,11 @@ INSTALLED_APPS = [
     'mayflower_server.controls',
     'mayflower_server.thermometer',
     'mayflower_server.video',
+    'mayflower_server.battery',
+    'mayflower_server.gps',
+    'mayflower_server.imu',
+    # 'mayflower_server.distance',
+    # 'mayflower_server.lidar',
 ]
 
 MIDDLEWARE = [

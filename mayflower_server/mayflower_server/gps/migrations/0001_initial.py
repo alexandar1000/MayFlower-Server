@@ -12,11 +12,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Temperature',
+            name='GPS',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('received_at', models.DateTimeField(auto_now_add=True)),
-                ('temperature', models.FloatField()),
+                ('latitude', models.FloatField()),
+                ('longitude', models.FloatField()),
+                ('altitude', models.FloatField()),
             ],
         ),
     ]
