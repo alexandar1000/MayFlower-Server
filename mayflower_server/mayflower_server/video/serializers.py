@@ -4,7 +4,7 @@ from mayflower_server.video.models import VideoImage
 
 class VideoFeedSerializer(serializers.HyperlinkedModelSerializer):
     '''
-    Serializer for the Temperature model
+    Serializer for the Video Feed model
     '''
     class Meta:
         model = VideoImage
