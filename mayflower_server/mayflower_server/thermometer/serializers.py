@@ -10,4 +10,4 @@ class TemperatureSerializer(serializers.HyperlinkedModelSerializer):
     '''
     class Meta:
         model = Temperature
-        fields = ['id', 'temperature']
+        fields = ['id', 'header_secs', 'temperature', 'received_at']

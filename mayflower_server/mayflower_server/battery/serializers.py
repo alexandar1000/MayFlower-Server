@@ -2,12 +2,12 @@
 battery module serializer
 '''
 from rest_framework import serializers
-from mayflower_server.battery.models import BatteryPower
+from mayflower_server.battery.models import Battery
 
-class BatteryPowerSerializer(serializers.HyperlinkedModelSerializer):
+class BatterySerializer(serializers.HyperlinkedModelSerializer):
     '''
     Serializer for the BatteryPower model
     '''
     class Meta:
-        model = BatteryPower
-        fields = ['id', 'battery_power']
+        model = Battery
+        fields = ['id', 'received_at', 'header_secs', 'percentage', 'power_supply_status']

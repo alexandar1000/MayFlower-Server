@@ -11,6 +11,7 @@ class Lidar3D(models.Model):
     3D Lidar model used for the incoming CloudPoints data
     """
     received_at = models.DateTimeField(auto_now_add=True)
+    header_secs = models.PositiveIntegerField()
     height = models.IntegerField()
     width = models.IntegerField()
     fields = JSONBField(default=list, null=True, blank=True)
@@ -22,9 +23,3 @@ class Lidar3D(models.Model):
 
     def __str__(self):
         return str(self.received_at)
-
-# class PointField(medels.Model):
-#     name = models.CharField(max_length=1)
-#     offset = models.IntegerField()
-#     dataType = models.BinaryField()
-#     count = 1

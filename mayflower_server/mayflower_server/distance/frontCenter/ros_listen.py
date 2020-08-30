@@ -5,8 +5,6 @@ Connection with ROS regarding the incoming front center distance
 from __future__ import print_function
 from mayflower_server.distance.frontCenter.models import FrontCenterDistance
 from mayflower_server.ros_tools import subscriber, connector
-from django.core.files.base import ContentFile
-import datetime
 import logging
 
 logger = logging.getLogger(__name__)
@@ -33,7 +31,12 @@ class RosFrontCenterDistanceListener(subscriber.RosSubscriber):
     def receive_frontCenter(self, laserData):
         if connector.RosConnector.is_connected():
             try:
-                frontCenter = FrontCenterDistance(distance=laserData['range'], header_secs=laserData['header']['stamp']['secs'])
+                distance = ""
+                if(laserData['range'] > 10):
+                    distance = "> 10"
+                else:
+                    distance = str(laserData['range'])
+                frontCenter = FrontCenterDistance(distance=distance, header_secs=laserData['header']['stamp']['secs'])
                 frontCenter.save()
             except Exception:
                 logger.error("Error while saving the front center laser distance from ROS")

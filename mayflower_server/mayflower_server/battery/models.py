@@ -4,13 +4,16 @@ battery module model
 
 from django.db import models
 
+
 # Create your models here.
-class BatteryPower(models.Model):
+class Battery(models.Model):
     '''
-    Battery model is used for the incomming battery power readings
+    Battery model is used for the incomming battery data readings
     '''
     received_at = models.DateTimeField(auto_now_add=True)
-    batteryPower = models.FloatField()
+    header_secs = models.PositiveIntegerField()
+    percentage = models.FloatField()
+    power_supply_status = models.CharField(max_length=15)
 
     def __str__(self):
-        return str(self.batteryPower)
+        return str(self.percentage)

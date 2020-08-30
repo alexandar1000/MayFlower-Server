@@ -14,6 +14,7 @@ import logging
 logger = logging.getLogger(__name__)
 ros_client = RosLeftAngleDistanceListener()
 
+
 # Create your views here.
 class LeftAngleList(APIView):
     """

@@ -33,7 +33,8 @@ class RosIMUListener(subscriber.RosSubscriber):
             orientation = imuData['orientation']
             angular_vel = imuData['angular_velocity']
             linear_accel = imuData['linear_acceleration']
-            imu = IMU(orient_x=orientation['x'], orient_y=orientation['y'], orient_z=orientation['z'], orient_w=orientation['w'],
+            imu = IMU(header_secs=imuData['header']['stamp']['secs'], orient_x=orientation['x'],
+                      orient_y=orientation['y'], orient_z=orientation['z'], orient_w=orientation['w'],
                       angular_velocity_roll=angular_vel['x'], angular_velocity_yaw=angular_vel['y'],
                       angular_velocity_pitch=angular_vel['z'], linear_acceleration_forward=linear_accel['x'],
                       linear_acceleration_up=linear_accel['y'] , linear_acceleration_left=linear_accel['z'])

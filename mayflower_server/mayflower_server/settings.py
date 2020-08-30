@@ -162,7 +162,7 @@ DATABASES = {
         'NAME': env("DATABASE_NAME"),
         'USER': env("DATABASE_USER"),
         'PASSWORD': env("DATABASE_PASSWORD"),
-        'HOST': env("DATABASE_HOST"), # 'localhost' for running locally 'db' for within docker
+        'HOST': env("DATABASE_HOST"),  # 'localhost' for running locally 'db' for within docker
         'PORT': env("DATABASE_PORT"),
     }
 }

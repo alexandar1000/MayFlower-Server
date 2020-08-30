@@ -8,4 +8,5 @@ class Lidar3DSerializer(serializers.HyperlinkedModelSerializer):
     '''
     class Meta:
         model = Lidar3D
-        fields = ['id', 'received_at', 'height', 'width', 'fields', 'is_bigendian', 'point_step', 'row_step', 'data', 'is_dense']
+        fields = ['id', 'received_at', 'header_secs', 'height', 'width', 'fields', 'is_bigendian',
+                  'point_step', 'row_step', 'data', 'is_dense']

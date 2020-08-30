@@ -5,67 +5,67 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
-from mayflower_server.battery.models import BatteryPower
-from mayflower_server.battery.serializers import BatteryPowerSerializer
-from .ros_listen import RosBatteryPowerListener
+from mayflower_server.battery.models import Battery
+from mayflower_server.battery.serializers import BatterySerializer
+from .ros_listen import RosBatteryListener
 import logging
 
 logger = logging.getLogger(__name__)
-ros_client = RosBatteryPowerListener()
+ros_client = RosBatteryListener()
 
 
-class BatteryPowerList(APIView):
+class BatteryList(APIView):
     """
-    List all batteryPower, or create a new batteryPower reading.
+    List all battery, or create a new battery data reading.
     """
     def get(self, request):
         '''
-        Return all the batteryPower entries.
+        Return all the battery entries.
         '''
-        batteryPower = BatteryPower.objects.all()
-        serializer = BatteryPowerSerializer(batteryPower, many=True)
+        battery = Battery.objects.all()
+        serializer = BatterySerializer(battery, many=True)
         return Response(serializer.data)
 
     def post(self, request):
         '''
-        Post a new batteryPower entry.
+        Post a new battery entry.
         '''
-        serializer = BatteryPowerSerializer(data=request.data)
+        serializer = BatterySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        logger.warning("Invalid battery power post request")
+        logger.warning("Invalid battery post request")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class BatteryPowerDetail(APIView):
+class BatteryDetail(APIView):
     """
-    Retrieve, update or delete a BatteryPower reading.
+    Retrieve, update or delete a Battery reading.
     """
 
     def get_object(self, primary_key):
         '''
-        Retrieve the batteryPower db object with the primary key primary_key.
+        Retrieve the battery db object with the primary key primary_key.
         '''
         try:
-            return BatteryPower.objects.get(pk=primary_key)
-        except BatteryPower.DoesNotExist:
-            logger.error("Invalid battery power reading request")
+            return Battery.objects.get(pk=primary_key)
+        except Battery.DoesNotExist:
+            logger.error("Invalid battery data reading request")
             raise Http404
 
     def get(self, request, primary_key):
         '''
-        Return the batteryPower with the primary key primary_key.
+        Return the battery with the primary key primary_key.
         '''
-        batteryPower = self.get_object(primary_key)
-        serializer = BatteryPowerSerializer(batteryPower)
+        battery = self.get_object(primary_key)
+        serializer = BatterySerializer(battery)
         return Response(serializer.data)
 
     def delete(self, request, primary_key):
         '''
-        Delete the batteryPower with the primary key primary_key.
+        Delete the battery with the primary key primary_key.
         '''
-        batteryPower = self.get_object(primary_key)
-        batteryPower.delete()
+        battery = self.get_object(primary_key)
+        battery.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

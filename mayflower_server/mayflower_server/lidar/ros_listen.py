@@ -32,7 +32,8 @@ class RosLidar3DListener(subscriber.RosSubscriber):
     def receive_lidar3D_reading(self, lidarData):
         if connector.RosConnector.is_connected():
             dataByte = bytes(lidarData['data'], 'utf8')
-            lidar = Lidar3D(height=lidarData['height'], width=lidarData['width'], fields=lidarData['fields'],
+            lidar = Lidar3D(header_secs=lidarData['header']['stamp']['secs'],height=lidarData['height'],
+                            width=lidarData['width'], fields=lidarData['fields'],
                             is_bigendian=lidarData['is_bigendian'], point_step=lidarData['point_step'],
                             row_step=lidarData['row_step'], data=dataByte, is_dense=lidarData['is_dense'])
             lidar.save()

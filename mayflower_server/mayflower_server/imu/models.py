@@ -10,6 +10,7 @@ class IMU(models.Model):
     IMU model used for the incoming imuData readings
     '''
     received_at = models.DateTimeField(auto_now_add=True)
+    header_secs = models.PositiveIntegerField()
     orient_x = models.FloatField()
     orient_y = models.FloatField()
     orient_z = models.FloatField()

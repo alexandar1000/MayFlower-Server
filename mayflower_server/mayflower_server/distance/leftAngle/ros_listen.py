@@ -5,11 +5,10 @@ Connection with ROS regarding the incoming left angle distance
 from __future__ import print_function
 from mayflower_server.distance.leftAngle.models import LeftAngleDistance
 from mayflower_server.ros_tools import subscriber, connector
-from django.core.files.base import ContentFile
-import datetime
 import logging
 
 logger = logging.getLogger(__name__)
+
 
 class RosLeftAngleDistanceListener(subscriber.RosSubscriber):
 
@@ -34,7 +33,13 @@ class RosLeftAngleDistanceListener(subscriber.RosSubscriber):
     def receive_leftAngle(self, laserData):
         if connector.RosConnector.is_connected():
             try:
-                leftAngle = LeftAngleDistance(distance=laserData['range'], header_secs=laserData['header']['stamp']['secs'])
+                distance = ""
+                if (laserData['range'] > 10):
+                    distance = "> 10"
+                else:
+                    distance = str(laserData['range'])
+
+                leftAngle = LeftAngleDistance(distance=distance, header_secs=laserData['header']['stamp']['secs'])
                 leftAngle.save()
             except Exception:
                 logger.error("Error while saving the left angle laser distance from ROS")
