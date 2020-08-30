@@ -28,5 +28,6 @@ class RosGPSListener(subscriber.RosSubscriber):
 
     def receive_gps(self, gpsData):
         if connector.RosConnector.is_connected():
-            gps = GPS(latitude=gpsData['latitude'], longitude=gpsData['longitude'], altitude=gpsData['altitude'])
+            gps = GPS(header_secs=gpsData['header']['stamp']['secs'], latitude=gpsData['latitude'],
+                      longitude=gpsData['longitude'], altitude=gpsData['altitude'])
             gps.save()

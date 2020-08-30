@@ -10,4 +10,4 @@ class GPSSerializer(serializers.HyperlinkedModelSerializer):
     '''
     class Meta:
         model = GPS
-        fields = ['id', 'latitude', 'longitude', 'altitude']
+        fields = ['id', 'received_at', 'header_secs', 'latitude', 'longitude', 'altitude']

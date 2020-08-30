@@ -26,4 +26,10 @@ urlpatterns = [
     path('api/v1/battery/', include('mayflower_server.battery.urls')),
     path('api/v1/gps/', include('mayflower_server.gps.urls')),
     path('api/v1/imu/', include('mayflower_server.imu.urls')),
+    path('api/v1/3DLidar/', include('mayflower_server.lidar.urls')),
+    path('api/v1/frontCenter', include('mayflower_server.distance.frontCenter.urls')),
+    path('api/v1/frontLeft', include('mayflower_server.distance.frontLeft.urls')),
+    path('api/v1/frontRight', include('mayflower_server.distance.frontRight.urls')),
+    path('api/v1/leftAngle', include('mayflower_server.distance.leftAngle.urls')),
+    path('api/v1/rightAngle', include('mayflower_server.distance.rightAngle.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

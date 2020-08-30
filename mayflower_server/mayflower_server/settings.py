@@ -55,8 +55,13 @@ INSTALLED_APPS = [
     'mayflower_server.battery',
     'mayflower_server.gps',
     'mayflower_server.imu',
-    # 'mayflower_server.distance',
-    # 'mayflower_server.lidar',
+    'mayflower_server.distance.frontCenter',
+    'mayflower_server.distance.frontLeft',
+    'mayflower_server.distance.frontRight',
+    'mayflower_server.distance.leftAngle',
+    'mayflower_server.distance.rightAngle',
+    'mayflower_server.lidar',
+    # 'mayflower_server.light',
 ]
 
 MIDDLEWARE = [
@@ -157,7 +162,7 @@ DATABASES = {
         'NAME': env("DATABASE_NAME"),
         'USER': env("DATABASE_USER"),
         'PASSWORD': env("DATABASE_PASSWORD"),
-        'HOST': env("DATABASE_HOST"), # 'localhost' for running locally 'db' for within docker
+        'HOST': env("DATABASE_HOST"),  # 'localhost' for running locally 'db' for within docker
         'PORT': env("DATABASE_PORT"),
     }
 }
