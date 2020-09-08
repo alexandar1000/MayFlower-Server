@@ -54,18 +54,18 @@ class BatteryDetail(APIView):
             logger.error("Invalid battery data reading request")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the battery with the primary key primary_key.
         '''
-        battery = self.get_object(primary_key)
+        battery = self.get_object(pk)
         serializer = BatterySerializer(battery)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the battery with the primary key primary_key.
         '''
-        battery = self.get_object(primary_key)
+        battery = self.get_object(pk)
         battery.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

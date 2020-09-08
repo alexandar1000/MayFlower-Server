@@ -54,18 +54,18 @@ class RightAngleDetail(APIView):
             logger.warning("Non-existing right angle distance requested from the server")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the right_angle_distance with the primary key primary_key.
         '''
-        right_angle = self.get_object(primary_key)
+        right_angle = self.get_object(pk)
         serializer = RightAngleDistanceSerializer(right_angle)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the right_angle_distance with the primary key primary_key.
         '''
-        right_angle = self.get_object(primary_key)
+        right_angle = self.get_object(pk)
         right_angle.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

@@ -54,18 +54,18 @@ class Lidar3DDetail(APIView):
             logger.warning("Non-existing 3D Lidar requested from the server")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the 3D Lidar with the primary key primary_key.
         '''
-        lidar = self.get_object(primary_key)
+        lidar = self.get_object(pk)
         serializer = Lidar3DSerializer(lidar)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the 3D Lidar with the primary key primary_key.
         '''
-        lidar = self.get_object(primary_key)
+        lidar = self.get_object(pk)
         lidar.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

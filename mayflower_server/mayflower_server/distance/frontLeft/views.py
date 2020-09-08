@@ -54,18 +54,18 @@ class FrontLeftDetail(APIView):
             logger.warning("Non-existing front left distance requested from the server")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the front_left_distance with the primary key primary_key.
         '''
-        front_left = self.get_object(primary_key)
+        front_left = self.get_object(pk)
         serializer = FrontLeftDistanceSerializer(front_left)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the front_left_distance with the primary key primary_key.
         '''
-        front_left = self.get_object(primary_key)
+        front_left = self.get_object(pk)
         front_left.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

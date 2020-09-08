@@ -54,18 +54,18 @@ class FrontCenterDetail(APIView):
             logger.warning("Non-existing front center distance requested from the server")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the front_center_distance with the primary key primary_key.
         '''
-        front_center = self.get_object(primary_key)
+        front_center = self.get_object(pk)
         serializer = FrontCenterDistanceSerializer(front_center)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the front_center_distance with the primary key primary_key.
         '''
-        front_center = self.get_object(primary_key)
+        front_center = self.get_object(pk)
         front_center.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

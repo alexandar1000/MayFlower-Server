@@ -54,18 +54,18 @@ class TemperatureDetail(APIView):
             logger.error("Invalid temperature reading request")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the temperature_reding with the primary key primary_key.
         '''
-        temperature = self.get_object(primary_key)
+        temperature = self.get_object(pk)
         serializer = TemperatureSerializer(temperature)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the temperature_reding with the primary key primary_key.
         '''
-        temperature = self.get_object(primary_key)
+        temperature = self.get_object(pk)
         temperature.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

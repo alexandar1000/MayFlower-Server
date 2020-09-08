@@ -8,4 +8,4 @@ class VideoFeedSerializer(serializers.HyperlinkedModelSerializer):
     '''
     class Meta:
         model = VideoImage
-        fields = ['id', 'created_at', 'video_image']
+        fields = ['id', 'received_at', 'video_image']

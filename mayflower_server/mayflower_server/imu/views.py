@@ -54,18 +54,18 @@ class IMUDetail(APIView):
             logger.error("Invalid IMUData request")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the IMUData with the primary key primary_key.
         '''
-        imu = self.get_object(primary_key)
+        imu = self.get_object(pk)
         serializer = IMUSerializer(imu)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the IMU with the primary key primary_key.
         '''
-        imu = self.get_object(primary_key)
+        imu = self.get_object(pk)
         imu.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
