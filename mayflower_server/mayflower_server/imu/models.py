@@ -23,13 +23,13 @@ class IMU(models.Model):
     linear_acceleration_left = models.FloatField()
 
     def getOrientation(self):
-        return '(%f, %f, %f, %f)' % (self.orient_x, self.orient_y, self.orient_z, self.orient_w)
+        return '(%.6f, %.6f, %.6f, %.6f)' % (self.orient_x, self.orient_y, self.orient_z, self.orient_w)
 
     def getAngularVelocity(self):
-        return '%f, %f, %f' % (self.angular_velocity_roll, self.angular_velocity_yaw, self.angular_velocity_pitch)
+        return '(%f, %f, %f)' % (self.angular_velocity_roll, self.angular_velocity_yaw, self.angular_velocity_pitch)
 
     def getLinearAcceleration(self):
-        return '%f, %f, %f' % (self.linear_acceleration_forward, self.linear_acceleration_up, self.linear_acceleration_left)
+        return '(%f, %f, %f)' % (self.linear_acceleration_forward, self.linear_acceleration_up, self.linear_acceleration_left)
 
     def __str__(self):
         return "Orientation: " + self.getOrientation() + "\n Angular velocity: " + self.getAngularVelocity() + "\n Linear Acceleration: " + self.getLinearAcceleration()

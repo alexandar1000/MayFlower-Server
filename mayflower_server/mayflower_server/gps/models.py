@@ -9,4 +9,4 @@ class GPS(models.Model):
     altitude = models.FloatField()
 
     def __str__(self):
-        return '%.8f, %.8f, %.8f' % (self.latitude, self.longitude, self.altitude)
+        return '(%.8f, %.8f, %.8f)' % (self.latitude, self.longitude, self.altitude)

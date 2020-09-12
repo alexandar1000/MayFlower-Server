@@ -8,7 +8,7 @@ from django.db import models
 # Create your models here.
 class Battery(models.Model):
     '''
-    Battery model is used for the incomming battery data readings
+    Battery model is used for the incoming battery data readings
     '''
     received_at = models.DateTimeField(auto_now_add=True)
     header_secs = models.PositiveIntegerField()
