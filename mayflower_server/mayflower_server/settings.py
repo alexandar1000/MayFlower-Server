@@ -52,6 +52,16 @@ INSTALLED_APPS = [
     'mayflower_server.controls',
     'mayflower_server.thermometer',
     'mayflower_server.video',
+    'mayflower_server.battery',
+    'mayflower_server.gps',
+    'mayflower_server.imu',
+    'mayflower_server.distance.frontCenter',
+    'mayflower_server.distance.frontLeft',
+    'mayflower_server.distance.frontRight',
+    'mayflower_server.distance.leftAngle',
+    'mayflower_server.distance.rightAngle',
+    'mayflower_server.lidar',
+    # 'mayflower_server.light',
 ]
 
 MIDDLEWARE = [
@@ -152,11 +162,24 @@ DATABASES = {
         'NAME': env("DATABASE_NAME"),
         'USER': env("DATABASE_USER"),
         'PASSWORD': env("DATABASE_PASSWORD"),
-        'HOST': env("DATABASE_HOST"), # 'localhost' for running locally 'db' for within docker
+        'HOST': env("DATABASE_HOST"),  # 'localhost' for running locally 'db' for within docker
         'PORT': env("DATABASE_PORT"),
     }
 }
 
+# Pagination
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+# }
+
+# Set authenticate permission
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

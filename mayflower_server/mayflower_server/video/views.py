@@ -54,18 +54,18 @@ class VideoFeedDetail(APIView):
             logger.warning("Non-existing video requested from the server")
             raise Http404
 
-    def get(self, request, primary_key):
+    def get(self, request, pk):
         '''
         Return the video_reading with the primary key primary_key.
         '''
-        video_image = self.get_object(primary_key)
+        video_image = self.get_object(pk)
         serializer = VideoFeedSerializer(video_image)
         return Response(serializer.data)
 
-    def delete(self, request, primary_key):
+    def delete(self, request, pk):
         '''
         Delete the video_reading with the primary key primary_key.
         '''
-        video_image = self.get_object(primary_key)
+        video_image = self.get_object(pk)
         video_image.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
