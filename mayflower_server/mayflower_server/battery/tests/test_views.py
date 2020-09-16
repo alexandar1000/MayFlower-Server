@@ -10,7 +10,6 @@ client = Client()
 
 class GetAllBatteriesTest(TestCase):
     """ Test module for GET all Batterys API """
-
     def setUp(self):
         Battery.objects.create(
             header_secs=1, percentage=98.70, power_supply_status="DISCHARGING")
