@@ -17,9 +17,9 @@ class GPSList(generics.ListCreateAPIView):
 
     queryset = GPS.objects.all()
     serializer_class = GPSSerializer
-    filter_backends = (rest_framework.DjangoFilterBackend, filters.SearchFilter)
-    filter_class = GPSFilter
-    search_fields = ('max_header_secs', 'min_header_secs')
+    # filter_backends = (rest_framework.DjangoFilterBackend, filters.SearchFilter)
+    # filter_class = GPSFilter
+    # search_fields = ('max_header_secs', 'min_header_secs')
 
 
 class GPSDetail(generics.RetrieveUpdateDestroyAPIView):
