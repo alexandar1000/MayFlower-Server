@@ -5,6 +5,7 @@ from __future__ import print_function
 from mayflower_server.thermometer.models import Temperature
 from mayflower_server.ros_tools import subscriber, connector
 import logging
+import datetime
 
 logger = logging.getLogger(__name__)
 
