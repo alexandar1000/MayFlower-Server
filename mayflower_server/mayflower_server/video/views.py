@@ -86,7 +86,7 @@ class ImageFeedDetail(APIView):
         # paths = [os.path.join(path, basename) for basename in files]
 
         # latest_file = max(paths, key=os.path.getctime)
-        latest_file = max(glob.glob(f'{path}/*.jpeg'), key=os.path.getmtime)
+        latest_file = max(glob.glob(f'{path}/*.jpg'), key=os.path.getmtime)
         try:
             img = open(latest_file, 'rb')
             response = FileResponse(img)

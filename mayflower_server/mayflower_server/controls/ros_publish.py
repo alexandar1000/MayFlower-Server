@@ -7,9 +7,10 @@ logger = logging.getLogger(__name__)
 
 class RosControlPublisher(RosPublisher):
 
-    def __init__(self, topic='/boat_controls'):
+    def __init__(self, topic='/boat_teleop/cmd_vel'):
         super().__init__()
         self.message_type = 'std_msgs/String'
+        self.topic = topic
         self.talker = self.publish_to_topic(topic, self.message_type)
 
     def send_command(self, command):
@@ -21,7 +22,7 @@ class RosControlPublisher(RosPublisher):
         if self.is_connected():
             data = {'data': command.lower()}
             self.publish_message(self.talker, data)
-            logger.info(f'Sent control command: "{data}" at {datetime.now()}')
+            logger.info(f'Sent control command: "{data}" at {datetime.now()} to {self.topic}')
             return True
 
     def terminate_topic(self):
