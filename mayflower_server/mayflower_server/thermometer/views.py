@@ -49,6 +49,8 @@ class TemperatureDetail(APIView):
         Retrieve the temperature_reding db object with the primary key primary_key.
         '''
         try:
+            if primary_key == 0:
+                return Temperature.objects.last()
             return Temperature.objects.get(pk=primary_key)
         except Temperature.DoesNotExist:
             logger.error("Invalid temperature reading request")

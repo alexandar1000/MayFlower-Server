@@ -5,6 +5,7 @@ from __future__ import print_function
 from mayflower_server.thermometer.models import Temperature
 from mayflower_server.ros_tools import subscriber, connector
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +31,6 @@ class RosTemperatureListener(subscriber.RosSubscriber):
         Accept the incoming temperature reading
         '''
         if connector.RosConnector.is_connected():
-            temperature = Temperature(header_secs=temperature_reading['header']['stamp']['secs'],
+            temperature = Temperature(header_secs=time.time(),
                                       temperature=temperature_reading['data'])
             temperature.save()

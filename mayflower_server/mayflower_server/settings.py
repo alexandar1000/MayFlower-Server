@@ -222,7 +222,9 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORSE_ORIGIN_WHITELIST = (
-    'http://localhost:8081'
+    'http://localhost:8081',
+    'http://localhost:3000',
+    'http://localhost:8080'
 )
 
 
