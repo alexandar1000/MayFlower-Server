@@ -2,6 +2,8 @@ from mayflower_server.gps.models import GPS
 from mayflower_server.gps.serializers import GPSSerializer
 from .filters import GPSFilter
 from rest_framework import generics, filters
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from django_filters import rest_framework
 from django.http import JsonResponse
 import json
@@ -34,9 +36,10 @@ def GPSConvert(request):
     handles Unity coordinates (x, z) converting to GPS (latitude, longitude)
     """
     StartPoint = (940, 437)
-    StartGPS = (53.38455701638842, -1.4595508575439455)
+    StartGPS = (-1.4595508575439455, 53.38455701638842)
     EndPoint = (-1228, -787)
-    EndGPS = (53.403750049393025, -1.4112067222595215)
+    EndGPS = (-1.4112067222595215, 53.403750049393025)
+    # X - longitude; Z - latitude
     x_unit = (EndGPS[0] - StartGPS[0]) / (EndPoint[0] - StartPoint[0])
     z_unit = (EndGPS[1] - StartGPS[1]) / (EndPoint[1] - StartPoint[1])
 
@@ -48,12 +51,20 @@ def GPSConvert(request):
     # elif request.method == "POST":
     #     json_data = json.loads(request.body)
 
-    lat = StartGPS[0] + (x_unit * (int(cord_x, base=10) - StartPoint[0]))
-    lon = StartGPS[1] + (z_unit * (int(cord_z, base=10) - StartPoint[1]))
+    lon = StartGPS[0] + (x_unit * (int(cord_x, base=10) - StartPoint[0]))
+    lat = StartGPS[1] + (z_unit * (int(cord_z, base=10) - StartPoint[1]))
     data = {
-        'latitude': lat,
-        'longitude': lon
+        'longitude': lon,
+        'latitude': lat
     }
     return JsonResponse(data)
 
-
+class GPSCurrent(APIView):
+    """
+    Get the current（latest） GPS record
+    """
+    def get(self, request):
+        queryset = GPS.objects.all()
+        last_gps = queryset.last()
+        serializer = GPSSerializer(last_gps)
+        return Response(serializer.data)

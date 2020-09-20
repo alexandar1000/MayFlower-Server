@@ -69,3 +69,17 @@ class TemperatureDetail(APIView):
         temperature = self.get_object(pk)
         temperature.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class TemperatureCurrent(APIView):
+    """
+    Get the current (latest) Temperature
+    """
+
+    def get(self, request):
+        try:
+            last_temp = Temperature.objects.all().last()
+            serializer = TemperatureSerializer(last_temp)
+            return Response(serializer.data)
+        except Temperature.DoesNotExist:
+            logger.error("No temperature records")
+            raise Http404

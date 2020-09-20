@@ -30,6 +30,5 @@ class RosTemperatureListener(subscriber.RosSubscriber):
         Accept the incoming temperature reading
         '''
         if connector.RosConnector.is_connected():
-            temperature = Temperature(header_secs=temperature_reading['header']['stamp']['secs'],
-                                      temperature=temperature_reading['data'])
+            temperature = Temperature(header_secs=temperature_reading['header']['stamp']['secs'],temperature=temperature_reading['data'])
             temperature.save()
