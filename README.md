@@ -14,9 +14,42 @@ In case you use requests other than GET without a trailing slash, Django will re
 2. `cd mayflower_server`
 3. Copy the `.env-example` file and rename it to `.env`
 4. Adjust the environment values as needed
-5. From the root folder, start the venv with `source venv/bin/activate`
+5. From the root folder, start the venv with:
+ 
+    `source venv/bin/activate` (Linux/Mac)
+    
+    `venv\scripts\activate` (Windows)
 6. Install the required dependancies with `pip install -r requirements.txt`.
 7. You are ready for development
 
 ### Important
 Change the environment values only in the `.env` file and not in the project `settings.py` file; they will automatically be updated this way.
+
+### Endpoints Supported
+The server will run on localhost:8000 by default.
+#### Battery
++ GET /api/v1/battery/   [Get the whole list of battery]
++ GET /api/v1/battery/<int: battery_id>/ [Get a single battery by id]
++ POST /api/v1/battery/ [Create new battery with 'application/json' as content_type]
++ PUT /api/v1/battery/<int: battery_id>/ [Update a single battery by id]
++ DELETE /api/v1/battery/<int: battery_id>/ [Delete a single battery by id]
+
+#### Distance
+
+
+#### GPS
++ GET /api/v1/gps/   [Get the whole list of all GPS records]
++ GET /api/v1/gps/<int: gps_id>/ [Get a single GPS by id]
++ POST /api/v1/gps/ [Create new GPS record with 'application/json' as content_type]
++ PUT /api/v1/gps/<int: gps_id>/ [Update a single GPS record by id]
++ DELETE /api/v1/gps/<int: gps_id>/ [Delete a single GPS by id]
+
+#### 3D Lidar
+
+#### IMU
+
+#### Thermometer
+
+#### Video Image
+
+#### Controls

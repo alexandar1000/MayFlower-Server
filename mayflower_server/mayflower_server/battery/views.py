@@ -83,3 +83,12 @@ class BatteryDetail(APIView):
 
         logger.warning("Invalid battery put request")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BatteryCurrent(APIView):
+    """
+    Retrieve the current Battery record
+    """
+    def get(self, request):
+        last_battery = Battery.objects.all().last()
+        serializer = BatterySerializer(last_battery)
+        return Response(serializer.data)
