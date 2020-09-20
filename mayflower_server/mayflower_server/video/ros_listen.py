@@ -31,7 +31,7 @@ class RosVideoImageListener(subscriber.RosSubscriber):
 
     def receive_image_reading(self, image):
         if connector.RosConnector.is_connected():
-            name = f'image_{datetime.datetime.now().strftime("%Y:%m:%d:%H:%M:%S")}.jpeg'
+            name = f'image_{datetime.datetime.now().strftime("%Y:%m:%d:%H:%M:%S")}.jpg'
             try:
                 base64_bytes = image['data'].encode('ascii')
                 image_bytes = base64.b64decode(base64_bytes)

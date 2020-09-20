@@ -221,10 +221,13 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORSE_ORIGIN_WHITELIST = (
-    'http://localhost:8081'
-)
+ALLOWED_HOSTS=['*']
+CORS_ORIGIN_ALLOW_ALL = True
+# CORSE_ORIGIN_WHITELIST = (
+#     'http://localhost:8081',
+#     'http://localhost:3000',
+#     'http://localhost:8080'
+# )
 
 
 ROSBRIDGE_HOST_ADDRESS = env("ROSBRIDGE_HOST_ADDRESS")

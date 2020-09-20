@@ -6,9 +6,13 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
+from django.conf import settings
 from mayflower_server.video.models import VideoImage
 from mayflower_server.video.serializers import VideoFeedSerializer
 from .ros_listen import RosVideoImageListener
+from django.http import FileResponse
+import glob
+import os
 import logging
 
 logger = logging.getLogger(__name__)
@@ -69,3 +73,25 @@ class VideoFeedDetail(APIView):
         video_image = self.get_object(pk)
         video_image.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ImageFeedDetail(APIView):
+    '''
+    Retrieve the newest image from the database
+    '''
+
+    def get(self, request):
+        path = f'{settings.BASE_DIR}/video_images'
+        # files = os.listdir(path)
+        # paths = [os.path.join(path, basename) for basename in files]
+
+        # latest_file = max(paths, key=os.path.getctime)
+        latest_file = max(glob.glob(f'{path}/*.jpg'), key=os.path.getmtime)
+        try:
+            img = open(latest_file, 'rb')
+            response = FileResponse(img)
+
+            return response
+        except FileNotFoundError:
+            logger.error("No image found to retrieve")
+            raise Http404
