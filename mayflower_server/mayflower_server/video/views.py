@@ -10,10 +10,11 @@ from django.conf import settings
 from mayflower_server.video.models import VideoImage
 from mayflower_server.video.serializers import VideoFeedSerializer
 from .ros_listen import RosVideoImageListener
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 import glob
 import os
 import logging
+import base64
 
 logger = logging.getLogger(__name__)
 ros_client = RosVideoImageListener()
@@ -88,10 +89,13 @@ class ImageFeedDetail(APIView):
         # latest_file = max(paths, key=os.path.getctime)
         latest_file = max(glob.glob(f'{path}/*.jpg'), key=os.path.getmtime)
         try:
-            img = open(latest_file, 'rb')
-            response = FileResponse(img)
+            img = open(latest_file, 'rb').read()
+            img_string = base64.b64encode(img).decode('utf-8')
+            # response = FileResponse(img)
+            return HttpResponse(img_string)
 
-            return response
+
+            # return response
         except FileNotFoundError:
             logger.error("No image found to retrieve")
             raise Http404

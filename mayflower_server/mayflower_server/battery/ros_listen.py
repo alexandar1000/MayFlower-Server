@@ -30,7 +30,7 @@ class RosBatteryListener(subscriber.RosSubscriber):
         Accept the incoming battery data reading
         '''
         if connector.RosConnector.is_connected():
-            percentage = round(batteryData['percentage'], 2)
+            percentage = round(batteryData['percentage'], 5)
             battery = Battery(percentage=percentage, header_secs=batteryData['header']['stamp']['secs'])
             status = batteryData['power_supply_status']
             dataStr = ""
